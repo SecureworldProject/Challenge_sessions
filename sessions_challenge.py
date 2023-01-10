@@ -26,14 +26,16 @@ def executeChallenge():
     print("Python: starting executeChallenge()")
 
     text=os.popen('query user').read()
-    print(text)
+    #print(text)
 
     text=text[80:]
     
     sessions=text.split('\n')
     for i,session in enumerate(sessions):
-        print("Clave: "+str(i)+" value: "+session[:-22])
+        #print("Clave: "+str(i)+" value: "+session[:-28])
         sessions[i]=session[:-23]
+    #Remove last
+    sessions.pop()
     #print(sessions)
     key=""
     key='-'.join(sessions)
@@ -43,7 +45,7 @@ def executeChallenge():
 
     # The result is a tuple (key, key_size)
     result = (key, key_size)
-    print("Python:", result)
+    #print("Python:", result)
    
     return result
 
