@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 ### GLOBAL VARIABLES ###
 props_dict = {}
@@ -24,19 +25,14 @@ def init(props):
 def executeChallenge():
     print("Python: starting executeChallenge()")
 
-    # The key will be 0000 or name+MAC depending on if the device is near or not
-    cad = ""
+    text=os.popen('query user').read()
+    print(text)
 
-    cad=subprocess.Popen('query user',stdout=subprocess.PIPE,shell=False)
-    #proc = subprocess.Popen(["query user", "/etc/services"], stdout=subprocess.PIPE, shell=True)
-    (out, err) = cad.communicate()
-    #print("program output:", out)
-
-    text = str(out)
-    text=text[91:]
+    text=text[80:]
+    
     sessions=text.split('\n')
     for i,session in enumerate(sessions):
-        #print("Clave: "+str(i)+" value: "+session[:-22])
+        print("Clave: "+str(i)+" value: "+session[:-22])
         sessions[i]=session[:-23]
     #print(sessions)
     key=""
@@ -48,7 +44,7 @@ def executeChallenge():
     # The result is a tuple (key, key_size)
     result = (key, key_size)
     print("Python:", result)
-
+   
     return result
 
 
